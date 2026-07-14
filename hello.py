@@ -3,6 +3,21 @@
 name = input("Please enter your name:\t")
 age = float(input("Please enter your age:\t"))
 balance = float(input("Please enter your balacne:\t"))
+pin = "mado1230"
+tries = 3
+userpin = input("What is your password?:\t")
+while userpin != pin:
+    tries -= 1
+    if tries == 0:
+        print("Your account has been locked.")
+        exit()
+
+    print("Wrong PIN")
+    print(f"You have {tries} attempts remaining.")
+
+    userpin = input("What is your password?:\t")
+
+print("Correct PIN!")
 print(f"Welcome to our ATM program, {name.capitalize()}")
 print("""
 ===== ATM =====
