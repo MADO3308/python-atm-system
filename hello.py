@@ -1,4 +1,5 @@
 
+transactions = []
 
 name = input("Please enter your name:\t")
 age = float(input("Please enter your age:\t"))
@@ -26,7 +27,10 @@ while True:
 2. Deposit
 3. Withdraw
 4. Change Username
-5. Exit""")
+5. Show Transaction History
+6. Delete Last Transaction
+7. Clear Transaction History
+8. Exit""")
     print("=" *30)
     choice = int(input("What are you need, sir?:\t"))
     print("=" *30)
@@ -42,13 +46,16 @@ while True:
                 print("Adult : True")
             else:
                 print("Adult : False")
+            transactions.append("Viewed Account Info")   
         case 2:
             depo = float(input("How much do you want to deposit?"))
             if depo>0:
                 balance += depo
                 print(f"Your balance is: {balance:.2f}")
+                transactions.append(f"Deposited ${depo:.2f}")
             else:
                 print("Invalid amount")
+           
         case 3:
             withdraw = float(input("How much?:\t"))
             if withdraw>balance:
@@ -57,6 +64,7 @@ while True:
                 print("The amount has been successfully withdrawn.")
                 balance -= withdraw
                 print(f"Your balance now is: {balance:.2f}")
+                transactions.append(f"Withdrew ${withdraw:.2f}")
         case 4:
             newname = input("What is your new name?:\t").lower()
             if len(newname)>12:
@@ -69,7 +77,28 @@ while True:
                 name = newname
 
                 print(f"Username updated successfully to {name.capitalize()}")
+                transactions.append(f"Changed name to {newname}")
+                
         case 5:
+            
+            if len(transactions) == 0:
+                print("No transactions yet.")
+            else:
+                print("Transaction History:")
+            for transaction in transactions:
+                print(transaction)
+        case 6:
+            if transactions:
+               transactions.pop()
+               print("Last transaction deleted!")
+            else:
+                print("No transactions to delete.")
+           
+        case 7:
+            transactions.clear()
+            print("History is already cleaned!")
+
+        case 8:
             print(f"Thank you for using our ATM, {name.capitalize()}!")
             break
         case _:
