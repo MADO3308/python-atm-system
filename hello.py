@@ -1,6 +1,10 @@
 
 transactions = []
-
+deposit_count = 0
+withdraw_count = 0
+name_change_count = 0
+total_deposit = 0
+total_withdraw = 0
 name = input("Please enter your name:\t")
 age = float(input("Please enter your age:\t"))
 balance = float(input("Please enter your balacne:\t"))
@@ -30,7 +34,8 @@ while True:
 5. Show Transaction History
 6. Delete Last Transaction
 7. Clear Transaction History
-8. Exit""")
+8. Statistics
+9. Exit""")
     print("=" *30)
     choice = int(input("What are you need, sir?:\t"))
     print("=" *30)
@@ -47,12 +52,15 @@ while True:
             else:
                 print("Adult : False")
             transactions.append("Viewed Account Info")   
+            
         case 2:
             depo = float(input("How much do you want to deposit?"))
             if depo>0:
                 balance += depo
                 print(f"Your balance is: {balance:.2f}")
                 transactions.append(f"Deposited ${depo:.2f}")
+                deposit_count += 1
+                total_deposit += depo
             else:
                 print("Invalid amount")
            
@@ -65,6 +73,8 @@ while True:
                 balance -= withdraw
                 print(f"Your balance now is: {balance:.2f}")
                 transactions.append(f"Withdrew ${withdraw:.2f}")
+                withdraw_count += 1
+                total_withdraw += withdraw
         case 4:
             newname = input("What is your new name?:\t").lower()
             if len(newname)>12:
@@ -73,11 +83,13 @@ while True:
                 print("Please remove the space!")
             elif not newname.isalpha():
                 print("Username must not contain digits")
+                
             else:
                 name = newname
 
                 print(f"Username updated successfully to {name.capitalize()}")
                 transactions.append(f"Changed name to {newname}")
+                name_change_count += 1
                 
         case 5:
             
@@ -85,8 +97,8 @@ while True:
                 print("No transactions yet.")
             else:
                 print("Transaction History:")
-            for transaction in transactions:
-                print(transaction)
+                for transaction in transactions:
+                    print(transaction)
         case 6:
             if transactions:
                transactions.pop()
@@ -97,8 +109,21 @@ while True:
         case 7:
             transactions.clear()
             print("History is already cleaned!")
-
+        
         case 8:
+            print(f"""
+            ===== Statistics =====
+
+Balance : ${balance:.2f}
+Transactions : {len(transactions)}
+Deposits : {deposit_count}
+Withdrawals : {withdraw_count}
+ Username Changes : {name_change_count}
+ Total Deposited : ${total_deposit:.2f}
+ Total Withdrawn : ${total_withdraw:.2f}
+            """)
+
+        case 9:
             print(f"Thank you for using our ATM, {name.capitalize()}!")
             break
         case _:
