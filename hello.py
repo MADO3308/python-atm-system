@@ -10,7 +10,8 @@ user_data = {
     'balance' : float(input("Please enter your balacne:\t")),
     'pin' : "mado1230",
     'tries' : 3,
-    'userpin' : input("What is your password?:\t")
+    'userpin' : input("What is your password?:\t"),
+    
 }
 
 while user_data['userpin'] != user_data["pin"]:
@@ -37,7 +38,8 @@ while True:
 6. Delete Last Transaction
 7. Clear Transaction History
 8. Statistics
-9. Exit""")
+9. Change password
+10. Exit""")
     print("=" *30)
     choice = int(input("What are you need, sir?:\t"))
     print("=" *30)
@@ -126,6 +128,28 @@ Withdrawals : {user_data['withdraw_count']}
             """)
 
         case 9:
+            old_pass = input("What is your old password?:\t")
+            while old_pass != user_data["pin"]:
+                user_data['tries'] -= 1
+                if user_data['tries'] == 0:
+                    print("Your account has been locked.")
+                    exit()
+                else:
+                    print("Wrong PIN")
+                    print(f"You have {user_data['tries']} attempts remaining.")
+                    old_pass = input("What is your old password?:\t")
+
+            print("Correct PIN!")
+            new_pass = input("What is your new password?:\t")
+            while new_pass == old_pass:
+                print("Please Enter differenet password")
+                new_pass = input("What is your new password?:\t")
+            user_data['pin'] = new_pass
+            user_data["transactions"].append(f"Changed password")
+            print("PIN changed successfully!")
+            user_data['tries'] = 3
+        
+        case 10:
             print(f"Thank you for using our ATM, {user_data['name'].capitalize()}!")
             break
         case _:
