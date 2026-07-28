@@ -1,3 +1,5 @@
+import pyfiglet
+from termcolor import colored
 user_data = {
     'transactions' : [],
     'deposit_count' : 0,
@@ -130,6 +132,8 @@ def exit_program():
 def invalid_choice():
     print("Please enter one number of below")
 
+
+
 while user_data['userpin'] != user_data["pin"]:
     user_data['tries'] -= 1
     if user_data['tries'] == 0:
@@ -143,7 +147,17 @@ while user_data['userpin'] != user_data["pin"]:
 
 print("Correct PIN!")
 print(f"Welcome to our ATM program, {user_data['name'].capitalize()}")
-    
+
+print(colored(
+    pyfiglet.figlet_format("ATM", font="slant"),
+    "green"
+))
+print(colored("[+] SYSTEM ONLINE", "green"))
+print(colored("[+] SECURE CONNECTION ESTABLISHED", "green"))
+print(colored("[+] ATM READY", "green"))
+print()
+
+
 while True:
     print("""
 ===== ATM =====
@@ -156,7 +170,8 @@ while True:
 7. Clear Transaction History
 8. Statistics
 9. Change password
-10. Exit""")
+10. Exit
+""")
     print("=" *30)
     choice = int(input("What are you need, sir?:\t"))
     print("=" *30)
